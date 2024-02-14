@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { schema } from "./validator";
 import styles from "./style.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Input } from "../Input";
+import { UserContext } from "../../../providers/UserContext";
 
 export const RegisterForm = () => {
   const {
@@ -15,10 +16,13 @@ export const RegisterForm = () => {
   } = useForm({
     resolver: zodResolver(schema),
   });
+
   const [loading, setLoading] = useState(false);
 
+  const { userRegister } = useContext(UserContext);
+
   const submit = (data) => {
-    console.log(data);
+    userRegister(data, setLoading, reset);
   };
   return (
     <form onSubmit={handleSubmit(submit)}>
