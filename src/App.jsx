@@ -1,14 +1,13 @@
-import { useState } from 'react'
-
+import { ToastContainer } from "react-toastify";
+import { RoutesMain } from "./routes";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>Olá</h1>
+      <RoutesMain />
+      <ToastContainer autoClose={3 * 1000} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
