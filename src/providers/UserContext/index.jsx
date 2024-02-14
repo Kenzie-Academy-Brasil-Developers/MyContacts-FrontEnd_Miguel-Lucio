@@ -10,11 +10,26 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [contactsList, setContactsList] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(user)
-  console.log(contactsList)
 
   const navigate = useNavigate();
   const pathname = window.location.pathname;
+
+  const userRegister = async (formData, setLoading, reset) => {
+    try {
+      setLoading(true);
+      await api.post("/users", formData);
+      toast.success("Cadastro realizado com sucesso");
+      reset();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      if (error.response?.data.message === "Email already exists.") {
+        toast.error("Email já cadastrado");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const userLogin = async (formData, setLoading, reset) => {
     try {
@@ -24,13 +39,11 @@ export const UserProvider = ({ children }) => {
       localStorage.setItem("@tokenMyContacts", data.token);
       setUser(data.user);
       setContactsList(data.user.contacts);
-     
 
       toast.success("Usuário válido");
       reset();
       navigate("/dashboard");
     } catch (error) {
-      
       if (error.response?.data.message === "Invalid credentials.") {
         toast.error("Email e/ou senha incorretos");
       }
@@ -47,6 +60,7 @@ export const UserProvider = ({ children }) => {
         setContactsList,
         loading,
         userLogin,
+        userRegister,
       }}
     >
       {children}
