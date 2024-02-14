@@ -5,7 +5,7 @@ export const schema = z
     fullName: z
       .string()
       .max(120, "Máximo de 120 caracteres")
-      .min(2, "Mínimo 2 caracteres")
+      .min(2, "Mínimo de 2 caracteres")
       .nonempty("O nome é obrigatório"),
     email: z
       .string()
@@ -28,7 +28,7 @@ export const schema = z
     phone: z
       .string()
       .max(20, "Máximo de 20 caracteres")
-      .min(2, "Mínimo 2 caracteres")
+      .min(2, "Mínimo de 2 caracteres")
       .nonempty("O campo telefone é obrigatório"),
     admin: z.boolean().default(false),
   })
