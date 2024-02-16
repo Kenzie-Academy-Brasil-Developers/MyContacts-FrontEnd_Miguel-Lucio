@@ -7,7 +7,7 @@ import { UserContext } from "../../providers/UserContext";
 export const DashboardPage = () => {
   const [hiddenOptions, setHiddenOptions] = useState(true);
 
-  const { user } = useContext(UserContext);
+  const { user, userLogout } = useContext(UserContext);
   return (
     <>
       <header>
@@ -33,11 +33,11 @@ export const DashboardPage = () => {
                   <div className={styles.options}>
                     <button>
                       <TbUserEdit size={18} color="#212529" />
-                      <p className="text">editar</p>
+                      <p className="text">Editar</p>
                     </button>
-                    <button>
+                    <button onClick={() => userLogout()}>
                       <TbLogout size={18} color="#212529" />
-                      <p className="text">sair</p>
+                      <p className="text">Sair</p>
                     </button>
                   </div>
                 )}
