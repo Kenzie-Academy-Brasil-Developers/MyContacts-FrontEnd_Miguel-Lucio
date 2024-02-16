@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
@@ -14,22 +14,29 @@ export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const pathname = window.location.pathname;
 
-  const userRegister = async (formData, setLoading, reset) => {
-    try {
-      setLoading(true);
-      await api.post("/users", formData);
-      toast.success("Cadastro realizado com sucesso");
-      reset();
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      if (error.response?.data.message === "Email already exists.") {
-        toast.error("Email já cadastrado");
+  useEffect(() => {
+    const token = localStorage.getItem("@tokenMyContacts");
+
+    const userAutoLogin = async () => {
+      try {
+        setLoading(true);
+
+        const { data } = await api.get("/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        setUser(data.user);
+        setContactsList(data.user.contacts);
+        navigate(pathname);
+      } catch (error) {
+        if (error.response?.status == 401) toast.error("Acesso expirado");
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+
+    if (token) userAutoLogin();
+  }, []);
 
   const userLogin = async (formData, setLoading, reset) => {
     try {
@@ -52,6 +59,31 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const userRegister = async (formData, setLoading, reset) => {
+    try {
+      setLoading(true);
+      await api.post("/users", formData);
+      toast.success("Cadastro realizado com sucesso");
+      reset();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      if (error.response?.data.message === "Email already exists.") {
+        toast.error("Email já cadastrado");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const userLogout = () => {
+    setUser(null);
+    setContactsList([]);
+    toast.error("Usuário deslogado");
+    navigate("/");
+    localStorage.removeItem("@tokenMyContacts");
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -61,6 +93,7 @@ export const UserProvider = ({ children }) => {
         loading,
         userLogin,
         userRegister,
+        userLogout,
       }}
     >
       {children}
