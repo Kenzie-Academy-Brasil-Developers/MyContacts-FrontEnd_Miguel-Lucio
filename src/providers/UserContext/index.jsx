@@ -45,7 +45,7 @@ export const UserProvider = ({ children }) => {
       setUser(data.user);
       setContactsList(data.user.contacts);
 
-      toast.success("Usuário válido");
+      toast.success("Usuário logado");
       reset();
       navigate("/dashboard");
     } catch (error) {
@@ -61,7 +61,7 @@ export const UserProvider = ({ children }) => {
     try {
       setLoading(true);
       await api.post("/users", formData);
-      toast.success("Cadastro realizado com sucesso");
+      toast.success("Usuário cadastrado");
       reset();
       navigate("/");
     } catch (error) {
@@ -93,6 +93,25 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const userDelete = async (id) => {
+    const token = localStorage.getItem("@tokenMyContacts");
+
+    try {
+      await api.delete(`/users/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser(null);
+      setContactsList([]);
+      toast.error("Usuário deletado");
+      navigate("/");
+      localStorage.removeItem("@tokenMyContacts");
+    } catch (error) {
+      if (error.response?.data.message === "User not found.") {
+        toast.error("Usuário não encontrado");
+      }
+    }
+  };
+
   const userLogout = () => {
     setUser(null);
     setContactsList([]);
@@ -111,6 +130,7 @@ export const UserProvider = ({ children }) => {
         userLogin,
         userRegister,
         userUpdate,
+        userDelete,
         userLogout,
       }}
     >
