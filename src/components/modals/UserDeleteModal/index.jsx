@@ -20,7 +20,7 @@ export const UserDeleteModal = ({ setHiddenUserDelete }) => {
         </div>
         <div className={styles.textBox}>
           <p className="title modal">
-            Tem certeza que deseja exluir seu perfil?
+            Tem certeza que deseja excluir seu perfil?
           </p>
           <p className="text gray300">
             Todos os dados vinculados a sua conta serão perdidos
