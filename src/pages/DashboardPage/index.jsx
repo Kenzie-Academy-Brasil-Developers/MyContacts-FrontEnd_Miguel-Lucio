@@ -4,10 +4,12 @@ import { RxHamburgerMenu, RxChevronDown } from "react-icons/rx";
 import { TbLogout, TbUserEdit, TbUserX } from "react-icons/tb";
 import { UserContext } from "../../providers/UserContext";
 import { UserUpdateModal } from "../../components/modals/UserUpdateModal";
+import { UserDeleteModal } from "../../components/modals/UserDeleteModal";
 
 export const DashboardPage = () => {
   const [hiddenOptions, setHiddenOptions] = useState(true);
   const [hiddenUserModal, setHiddenUserModal] = useState(true);
+  const [hiddenUserDelete, setHiddenUserDelete] = useState(true);
 
   const { user, userLogout } = useContext(UserContext);
   return (
@@ -41,7 +43,7 @@ export const DashboardPage = () => {
                       <TbUserEdit size={16} color="#212529" />
                       <p className="text medium">Editar</p>
                     </button>
-                    <button>
+                    <button onClick={() => setHiddenUserDelete(false)}>
                       <TbUserX size={16} color="#212529" />
                       <p className="text medium">Excluir</p>
                     </button>
@@ -67,6 +69,9 @@ export const DashboardPage = () => {
       </main>
       {!hiddenUserModal && (
         <UserUpdateModal setHiddenUserModal={setHiddenUserModal} />
+      )}
+      {!hiddenUserDelete && (
+        <UserDeleteModal setHiddenUserDelete={setHiddenUserDelete} />
       )}
     </>
   );
