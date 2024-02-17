@@ -48,7 +48,11 @@
 
       .options {
         position: fixed;
+        right: 13px;
         top: 90px;
+        @media (min-width: 790px) {
+          right: inherit;
+        }
 
         border: 1px solid transparent;
         border-radius: 4px;

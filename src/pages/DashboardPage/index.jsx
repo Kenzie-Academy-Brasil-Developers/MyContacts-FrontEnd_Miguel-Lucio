@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import styles from "./style.module.scss";
 import { RxHamburgerMenu, RxChevronDown } from "react-icons/rx";
-import { TbLogout, TbUserEdit } from "react-icons/tb";
+import { TbLogout, TbUserEdit, TbUserX } from "react-icons/tb";
 import { UserContext } from "../../providers/UserContext";
 import { UserUpdateModal } from "../../components/modals/UserUpdateModal";
 
@@ -33,13 +33,17 @@ export const DashboardPage = () => {
                 </button>
                 {!hiddenOptions && (
                   <div className={styles.options}>
-                    <button onClick={() => setHiddenUserModal(false)}>
-                      <TbUserEdit size={18} color="#212529" />
-                      <p className="text">Editar</p>
-                    </button>
                     <button onClick={() => userLogout()}>
-                      <TbLogout size={18} color="#212529" />
-                      <p className="text">Sair</p>
+                      <TbLogout size={16} color="#212529" />
+                      <p className="text medium">Sair</p>
+                    </button>
+                    <button onClick={() => setHiddenUserModal(false)}>
+                      <TbUserEdit size={16} color="#212529" />
+                      <p className="text medium">Editar</p>
+                    </button>
+                    <button>
+                      <TbUserX size={16} color="#212529" />
+                      <p className="text medium">Excluir</p>
                     </button>
                   </div>
                 )}
