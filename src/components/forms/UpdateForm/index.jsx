@@ -11,21 +11,19 @@ export const UpdateForm = ({ setHiddenUserModal }) => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     resolver: zodResolver(schema),
   });
 
   const [loading, setLoading] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user, userUpdate } = useContext(UserContext);
 
   const submit = (data) => {
     if (data.email == user.email) {
       delete data.email;
     }
-
-    console.log(data);
+    userUpdate(data, setLoading, user.id, setHiddenUserModal);
   };
   return (
     <form onSubmit={handleSubmit(submit)}>

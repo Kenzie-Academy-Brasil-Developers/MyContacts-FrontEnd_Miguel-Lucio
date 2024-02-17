@@ -24,7 +24,6 @@ export const UserProvider = ({ children }) => {
         const { data } = await api.get("/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
-
         setUser(data.user);
         setContactsList(data.user.contacts);
         navigate(pathname);
@@ -34,7 +33,6 @@ export const UserProvider = ({ children }) => {
         setLoading(false);
       }
     };
-
     if (token) userAutoLogin();
   }, []);
 
@@ -67,7 +65,26 @@ export const UserProvider = ({ children }) => {
       reset();
       navigate("/");
     } catch (error) {
-      console.log(error);
+      if (error.response?.data.message === "Email already exists.") {
+        toast.error("Email já cadastrado");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const userUpdate = async (formData, setLoading, id, setHiddenUserModal) => {
+    const token = localStorage.getItem("@tokenMyContacts");
+
+    try {
+      setLoading(true);
+      const { data } = await api.patch(`/users/${id}`, formData, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setUser({ ...user, ...data });
+      toast.success("Usuário atualizado");
+      setHiddenUserModal(true);
+    } catch (error) {
       if (error.response?.data.message === "Email already exists.") {
         toast.error("Email já cadastrado");
       }
@@ -93,6 +110,7 @@ export const UserProvider = ({ children }) => {
         loading,
         userLogin,
         userRegister,
+        userUpdate,
         userLogout,
       }}
     >
