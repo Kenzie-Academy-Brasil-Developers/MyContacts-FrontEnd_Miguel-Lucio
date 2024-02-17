@@ -3,9 +3,11 @@ import styles from "./style.module.scss";
 import { RxHamburgerMenu, RxChevronDown } from "react-icons/rx";
 import { TbLogout, TbUserEdit } from "react-icons/tb";
 import { UserContext } from "../../providers/UserContext";
+import { UserUpdateModal } from "../../components/modals/UserUpdateModal";
 
 export const DashboardPage = () => {
   const [hiddenOptions, setHiddenOptions] = useState(true);
+  const [hiddenUserModal, setHiddenUserModal] = useState(true);
 
   const { user, userLogout } = useContext(UserContext);
   return (
@@ -31,7 +33,7 @@ export const DashboardPage = () => {
                 </button>
                 {!hiddenOptions && (
                   <div className={styles.options}>
-                    <button>
+                    <button onClick={() => setHiddenUserModal(false)}>
                       <TbUserEdit size={18} color="#212529" />
                       <p className="text">Editar</p>
                     </button>
@@ -59,6 +61,9 @@ export const DashboardPage = () => {
           </div>
         </div>
       </main>
+      {!hiddenUserModal && (
+        <UserUpdateModal setHiddenUserModal={setHiddenUserModal} />
+      )}
     </>
   );
 };
