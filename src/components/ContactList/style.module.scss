@@ -1,0 +1,42 @@
+.contactBox {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .titleBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      border: 1px solid var(--gray600);
+      border-radius: 4px;
+      background-color: var(--gray800);
+
+      &:hover {
+        background-color: var(--gray700);
+      }
+    }
+  }
+
+  > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6.7px;
+
+    background-color: var(--gray800);
+    padding: 16px 9px;
+    border: 1px solid var(--gray600);
+    border-radius: 4px;
+
+    @media (min-width: 600px) {
+      gap: 10px;
+      padding: 23px 22px;
+    }
+  }
+}
