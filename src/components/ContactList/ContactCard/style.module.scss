@@ -1,0 +1,55 @@
+.cardBox {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 6px;
+  flex-direction: column;
+
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: var(--gray700);
+  padding: 12px;
+
+  .headerBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+
+    .firstChar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 31px;
+      width: 31px;
+      border: 1px solid var(--color-primary);
+      border-radius: 50%;
+      background-color: var(--color-primary);
+
+      > p {
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 400;
+      }
+    }
+    .buttonBox {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+
+  .profileBox {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .nameBox {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+}
