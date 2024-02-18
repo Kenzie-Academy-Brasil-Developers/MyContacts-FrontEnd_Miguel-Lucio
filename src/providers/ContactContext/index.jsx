@@ -1,12 +1,12 @@
 import { createContext, useContext, useState } from "react";
 import { UserContext } from "../UserContext";
 import { toast } from "react-toastify";
+import { api } from "../../services/api";
 
 export const ContactContext = createContext({});
 
 export const ContactProvider = ({ children }) => {
   const [hiddenCreateContact, setHiddenCreateContact] = useState(true);
-  const [hiddenUpdateContact, setHiddenUpdateContact] = useState(true);
   const [editingContact, setEditingContact] = useState(null);
 
   const { contactsList, setContactsList } = useContext(UserContext);
@@ -56,7 +56,6 @@ export const ContactProvider = ({ children }) => {
 
       setEditingContact(null);
       toast.success("Contato atualizado");
-      setHiddenUpdateContact(true);
     } catch (error) {
       console.log(error);
       if (
@@ -97,8 +96,6 @@ export const ContactProvider = ({ children }) => {
       value={{
         hiddenCreateContact,
         setHiddenCreateContact,
-        hiddenUpdateContact,
-        setHiddenUpdateContact,
         editingContact,
         setEditingContact,
         contactsList,
