@@ -61,7 +61,6 @@ export const ContactProvider = ({ children }) => {
       setEditingContact(null);
       toast.success("Contato atualizado");
     } catch (error) {
-      console.log(error);
       if (
         error.response?.data.message === "There is contact with this email."
       ) {
