@@ -4,7 +4,7 @@ import { RxTrash, RxPencil1 } from "react-icons/rx";
 import { ContactContext } from "../../../providers/ContactContext";
 
 export const ContactCard = ({ contact }) => {
-  const { contactDelete } = useContext(ContactContext);
+  const { setEditingContact, contactDelete } = useContext(ContactContext);
   return (
     <li>
       <div className={styles.cardBox}>
@@ -13,7 +13,11 @@ export const ContactCard = ({ contact }) => {
             <p>{contact.fullName.charAt(0).toUpperCase()}</p>
           </div>
           <div className={styles.buttonBox}>
-            <button>
+            <button
+              onClick={() => {
+                setEditingContact(contact);
+              }}
+            >
               <RxPencil1 size={16} color="#212529" />
             </button>
             <button
