@@ -5,6 +5,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { ErrorPage } from "../pages/ErrorPage";
 import { PublicRoutes } from "./PublicRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
+import { ContactProvider } from "../providers/ContactContext";
 
 export const RoutesMain = () => {
   return (
@@ -14,7 +15,14 @@ export const RoutesMain = () => {
         <Route path="/register" element={<RegisterPage />} />
       </Route>
       <Route element={<PrivateRoutes />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ContactProvider>
+              <DashboardPage />
+            </ContactProvider>
+          }
+        />
       </Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
