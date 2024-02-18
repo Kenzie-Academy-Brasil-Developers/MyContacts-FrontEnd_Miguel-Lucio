@@ -6,6 +6,8 @@ import { UserContext } from "../../providers/UserContext";
 import { UserUpdateModal } from "../../components/modals/UserUpdateModal";
 import { UserDeleteModal } from "../../components/modals/UserDeleteModal";
 import { ContactList } from "../../components/ContactList";
+import { ContactContext } from "../../providers/ContactContext";
+import { ContactCreateModal } from "../../components/modals/ContactCreateModal";
 
 export const DashboardPage = () => {
   const [hiddenOptions, setHiddenOptions] = useState(true);
@@ -13,6 +15,12 @@ export const DashboardPage = () => {
   const [hiddenUserDelete, setHiddenUserDelete] = useState(true);
 
   const { user, userLogout } = useContext(UserContext);
+  const {
+    hiddenCreateContact,
+    setHiddenCreateContact,
+    editingContact,
+    setEditingContact,
+  } = useContext(ContactContext);
   return (
     <>
       <header>
@@ -73,6 +81,9 @@ export const DashboardPage = () => {
           </div>
         </section>
       </main>
+      {!hiddenCreateContact && (
+        <ContactCreateModal setHiddenCreateContact={setHiddenCreateContact} />
+      )}
       {!hiddenUserModal && (
         <UserUpdateModal setHiddenUserModal={setHiddenUserModal} />
       )}
