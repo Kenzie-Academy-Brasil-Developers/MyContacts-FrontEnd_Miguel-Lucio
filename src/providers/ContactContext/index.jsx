@@ -12,7 +12,7 @@ export const ContactProvider = ({ children }) => {
   const { contactsList, setContactsList } = useContext(UserContext);
 
   const contactRegister = async (formData, setLoading, reset) => {
-    const token = localStorage.getItem("@tokenKenzieHub");
+    const token = localStorage.getItem("@tokenMyContacts");
 
     try {
       setLoading(true);
@@ -22,14 +22,18 @@ export const ContactProvider = ({ children }) => {
         },
       });
 
-      const newContactList = { ...contactsList, data };
-      setContactsList(newContactList);
+      const { email, fullName, phone, id, registeredAt } = data;
+
+      const newContactsList = [
+        ...contactsList,
+        { email, fullName, phone, id, registeredAt },
+      ];
+      setContactsList(newContactsList);
 
       reset();
       toast.success("Contato cadastrado");
       setHiddenCreateContact(true);
     } catch (error) {
-      console.log(error);
       if (
         error.response?.data.message === "There is contact with this email."
       ) {
@@ -41,7 +45,7 @@ export const ContactProvider = ({ children }) => {
   };
 
   const contactUpdate = async (formData, setLoading, id) => {
-    const token = localStorage.getItem("@tokenKenzieHub");
+    const token = localStorage.getItem("@tokenMyContacts");
 
     try {
       setLoading(true);
