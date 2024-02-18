@@ -7,11 +7,27 @@ import { ContactContext } from "../../providers/ContactContext";
 export const ContactList = () => {
   const { setHiddenCreateContact, contactsList } = useContext(ContactContext);
 
+  const sortContactList = contactsList.sort((a, b) => {
+    const fullNameA = a.fullName.toUpperCase();
+    const fullNameB = b.fullName.toUpperCase();
+
+    if (fullNameA < fullNameB) {
+      return -1;
+    }
+    if (fullNameA > fullNameB) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
     <div className={styles.contactBox}>
       <div className={styles.titleBox}>
         <h3 className="title label bold">Contatos</h3>
-        <button className={styles.button}>
+        <button
+          onClick={() => setHiddenCreateContact(false)}
+          className={styles.button}
+        >
           <RxPlus size={16} color="#212529" />
         </button>
       </div>
@@ -23,7 +39,7 @@ export const ContactList = () => {
             </p>
           </li>
         ) : (
-          contactsList.map((contact) => (
+          sortContactList.map((contact) => (
             <ContactCard key={contact.id} contact={contact} />
           ))
         )}
