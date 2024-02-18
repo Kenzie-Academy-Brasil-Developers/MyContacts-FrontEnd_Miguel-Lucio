@@ -5,6 +5,7 @@ import { TbLogout, TbUserEdit, TbUserX } from "react-icons/tb";
 import { UserContext } from "../../providers/UserContext";
 import { UserUpdateModal } from "../../components/modals/UserUpdateModal";
 import { UserDeleteModal } from "../../components/modals/UserDeleteModal";
+import { ContactList } from "../../components/ContactList";
 
 export const DashboardPage = () => {
   const [hiddenOptions, setHiddenOptions] = useState(true);
@@ -55,7 +56,7 @@ export const DashboardPage = () => {
         </div>
       </header>
       <main>
-        <div className={styles.infosBox}>
+        <section className={styles.infosBox}>
           <div className="container dash">
             <div className={styles.infosContent}>
               <p className="title bold">Olá, {user.fullName}</p>
@@ -65,7 +66,12 @@ export const DashboardPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </section>
+        <section>
+          <div className="container dash">
+            <ContactList />
+          </div>
+        </section>
       </main>
       {!hiddenUserModal && (
         <UserUpdateModal setHiddenUserModal={setHiddenUserModal} />
