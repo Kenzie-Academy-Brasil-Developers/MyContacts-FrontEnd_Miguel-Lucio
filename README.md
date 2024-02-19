@@ -16,6 +16,6 @@ npm install
 npm run dev
 ```
 
-Após Rodar a aplicação Voce poderá acessa-lá a partir da URL: http://localhost:5173/
+Após Rodar a aplicação, poderá acessa-lá a partir da URL: http://localhost:5173/
 
 A API utilizada na aplicação também pode ser acessada a partir do repositório: https://github.com/Kenzie-Academy-Brasil-Developers/MyContacts-API_Miguel-Lucio
