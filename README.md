@@ -1,4 +1,4 @@
-<h1 align = center>MyCOntacts</h1>
+<h1 align = center>MyContacts</h1>
 
 Aplicação front end desenvolvida em React, onde usuários podem criar e gerenciar seus contatos.
 
