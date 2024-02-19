@@ -1,8 +1,21 @@
-# React + Vite
+<h1 align = center>MyCOntacts</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação front end desenvolvida em React, onde usuários podem criar e gerenciar seus contatos.
 
-Currently, two official plugins are available:
+<h2>Configuração do ambiente</h1>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Dentro do diretório, abra o terminal e instale as dependências necessárias para rodar a aplicação localmente:
+
+```shell
+npm install
+```
+
+2. Para Rodar a aplicação utilize o comando abaixo:
+
+```shell
+npm run dev
+```
+
+Após Rodar a aplicação Voce poderá acessa-lá a partir da URL: http://localhost:5173/
+
+A API utilizada na aplicação também pode ser acessada a partir do repositório: https://github.com/Kenzie-Academy-Brasil-Developers/MyContacts-API_Miguel-Lucio
